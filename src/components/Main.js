@@ -19,7 +19,9 @@ export function Main(props){
             </section>
             <section className="elements" aria-label="галерея">
                 {/*галерея начало*/}
-               {props.cards}
+                <section className="elements" aria-label="галерея">
+                    {Card(props)}
+                </section>
             </section>
             {/*галерея конец*/}
         </main>

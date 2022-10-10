@@ -9,7 +9,11 @@ export function PopupWithForm(props) {
                 <button className="popup__close" type="button" onClick={props.onClose}/>
                 <form className="form form_profile" name={`${props.name}`} method="post" noValidate>
                     {props.children}
-                    {/*<button className="form__save-btn" type="submit">Сохранить</button>*/}
+                    <button className="form__save-btn form__change-ava-btn form__save-btn_invalid"
+                            type="submit"
+                            disabled>
+                        {props.btnText}
+                    </button>
                 </form>
             </div>
         </section>
