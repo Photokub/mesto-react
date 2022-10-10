@@ -21,6 +21,9 @@ export function Main(props){
                 {/*галерея начало*/}
                 <section className="elements" aria-label="галерея">
                     {Card(props)}
+                    {/*{props.cards.map((card) => (*/}
+                    {/*    <Card key={card.id}  />*/}
+                    {/*))}*/}
                 </section>
             </section>
             {/*галерея конец*/}

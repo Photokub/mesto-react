@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import logo from '../images/logo.svg';
 import {Header} from "./Header";
 import {Main} from "./Main";
 import {Footer} from "./Footer";
@@ -7,7 +6,7 @@ import {Footer} from "./Footer";
 import '../App.css';
 import {PopupWithForm} from "./PopupWithForm";
 import {api} from "../utils/Api";
-
+import {ImagePopup} from "./ImagePopup";
 
 
 function App() {
@@ -20,6 +19,7 @@ function App() {
     const [userDescription, setUserDescription] = React.useState('')
     const [userAvatar, setUserAvatar] = React.useState('')
     const [cards, setCards] = React.useState([])
+    const [selectedCard, setSelectedCard] =React.useState(null)
 
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true)
@@ -37,11 +37,16 @@ function App() {
         setIsConfirmPopupOpen(true)
     }
 
+    function handleCardClick(){
+        setSelectedCard(true)
+    }
+
     function closeAllPopups() {
         setIsConfirmPopupOpen(false)
         setIsAddPlacePopupOpen(false)
         setIsEditProfilePopupOpen(false)
         setIsEditAvatarPopupOpen(false)
+        setSelectedCard(false)
     }
 
     useEffect(() => {
@@ -90,9 +95,12 @@ function App() {
                 userDescription={userDescription}
                 userAvatar={userAvatar}
                 cards={cards}
+                onCardClick = {setSelectedCard}
             />
 
             <Footer/>
+
+            <ImagePopup  card= {selectedCard}/>
 
             <PopupWithForm
                 name="change-avatar"
@@ -171,16 +179,16 @@ function App() {
 
 
 
-            <section className="popup popup_full-size-image" type='button'
-                     aria-label="попап полноразмерного изображения">
-                <div className="popup__container-full-size-image">
-                    <button className="popup__close popup__close_full-size-image" type="button"></button>
-                    <figure className="popup__fullsize-img-figure">
-                        <img className="popup__fullsize-img-picture" src="mesto-react/src/components/App#" alt=""/>
-                        <figcaption className="popup__fullsize-img-caption">Название изображения</figcaption>
-                    </figure>
-                </div>
-            </section>
+            {/*<section className="popup popup_full-size-image" type='button'*/}
+            {/*         aria-label="попап полноразмерного изображения">*/}
+            {/*    <div className="popup__container-full-size-image">*/}
+            {/*        <button className="popup__close popup__close_full-size-image" type="button"></button>*/}
+            {/*        <figure className="popup__fullsize-img-figure">*/}
+            {/*            <img className="popup__fullsize-img-picture" src="mesto-react/src/components/App#" alt=""/>*/}
+            {/*            <figcaption className="popup__fullsize-img-caption">Название изображения</figcaption>*/}
+            {/*        </figure>*/}
+            {/*    </div>*/}
+            {/*</section>*/}
 
 
 
