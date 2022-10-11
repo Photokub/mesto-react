@@ -21,8 +21,9 @@
 
 
 
-**Git-pages**
-[ссылка на сайт](https://photokub.github.io/mesto/)
+[//]: # (**Git-pages**)
+
+[//]: # ([ссылка на сайт]&#40;https://photokub.github.io/mesto/&#41;)
 
 **Figma**
 
