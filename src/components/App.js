@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {Header} from "./Header";
 import {Main} from "./Main";
 import {Footer} from "./Footer";
@@ -11,15 +11,15 @@ import {ImagePopup} from "./ImagePopup";
 
 function App() {
 
-    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-    const [isConfirmPopupOpen, setIsConfirmPopupOpen] = React.useState(false);
-    const [userName, setUserNameState] = React.useState('')
-    const [userDescription, setUserDescription] = React.useState('')
-    const [userAvatar, setUserAvatar] = React.useState('')
-    const [cards, setCards] = React.useState([])
-    const [selectedCard, setSelectedCard] =React.useState(null)
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+    const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
+    const [userName, setUserNameState] = useState('')
+    const [userDescription, setUserDescription] = useState('')
+    const [userAvatar, setUserAvatar] = useState('')
+    const [cards, setCards] = useState([])
+    const [selectedCard, setSelectedCard] = useState('')
 
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true)
@@ -37,16 +37,12 @@ function App() {
         setIsConfirmPopupOpen(true)
     }
 
-    function handleCardClick(){
-        setSelectedCard(true)
-    }
-
     function closeAllPopups() {
         setIsConfirmPopupOpen(false)
         setIsAddPlacePopupOpen(false)
         setIsEditProfilePopupOpen(false)
         setIsEditAvatarPopupOpen(false)
-        setSelectedCard(false)
+        setSelectedCard("")
     }
 
     useEffect(() => {
@@ -95,12 +91,12 @@ function App() {
                 userDescription={userDescription}
                 userAvatar={userAvatar}
                 cards={cards}
-                onCardClick = {setSelectedCard}
+                onCardClick={setSelectedCard}
             />
 
             <Footer/>
 
-            <ImagePopup  card= {selectedCard}/>
+            <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
             <PopupWithForm
                 name="change-avatar"
@@ -176,23 +172,6 @@ function App() {
                 onChange
                 btnText="Да"
             />
-
-
-
-            {/*<section className="popup popup_full-size-image" type='button'*/}
-            {/*         aria-label="попап полноразмерного изображения">*/}
-            {/*    <div className="popup__container-full-size-image">*/}
-            {/*        <button className="popup__close popup__close_full-size-image" type="button"></button>*/}
-            {/*        <figure className="popup__fullsize-img-figure">*/}
-            {/*            <img className="popup__fullsize-img-picture" src="mesto-react/src/components/App#" alt=""/>*/}
-            {/*            <figcaption className="popup__fullsize-img-caption">Название изображения</figcaption>*/}
-            {/*        </figure>*/}
-            {/*    </div>*/}
-            {/*</section>*/}
-
-
-
-
 
         </div>
     );
