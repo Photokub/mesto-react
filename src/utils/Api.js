@@ -4,6 +4,10 @@
         this._headers = setting.headers;
     }
 
+     _request(url, options) {
+         return fetch(url, options).then(this.handleResp)
+     }
+
     handleResp(res) {
         if (!res.ok) {
             return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
@@ -11,13 +15,13 @@
         return res.json();
     }
 
-    getUserInfo() {
-        return fetch(`${this._adress}/users/me`, {
-            method: "GET",
-            headers: this._headers,
-        })
-            .then((res) => this.handleResp(res))
-    }
+     getUserInfo() {
+         return this._request(`${this._adress}/users/me`, {
+             method: "GET",
+             headers: this._headers,
+         })
+     }
+
 
     patchUserInfo({user_name_field, user_job_field}) {
         return fetch(`${this._adress}/users/me`, {
@@ -32,11 +36,10 @@
     }
 
     getDefaultCards() {
-        return fetch(`${this._adress}/cards`, {
+        return this._request(`${this._adress}/cards`, {
             method: "GET",
             headers: this._headers,
         })
-            .then((res) => this.handleResp(res))
     }
 
     postCard({name, link}) {
