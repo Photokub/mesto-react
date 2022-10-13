@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import avatar from "../images/Avatar.png"
 import {api} from "../utils/Api";
 import {Card} from "./Card";
 
@@ -51,14 +50,12 @@ export function Main(props) {
                 </div>
                 <button className="profile__add-btn" type="button" onClick={props.onAddPlace}>+</button>
             </section>
-            <section className="elements" aria-label="галерея">
                 {/*галерея начало*/}
                 <section className="elements" aria-label="галерея">
                     {cards.map((card) => (
                         <Card key={card._id} card={card} onCardClick={props.onCardClick}/>
                     ))}
                 </section>
-            </section>
             {/*галерея конец*/}
         </main>
     )
