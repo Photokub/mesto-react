@@ -78,12 +78,12 @@
     // }
 
     deleteMyCard(id) {
-        return fetch(`${this._adress}/cards/${id}`, {
+        return this._request(`${this._adress}/cards/${id}`, {
             method: "DELETE",
             headers: this._headers,
         })
-            .then((res) => this.handleResp(res))
     }
+
 
     patchAvatar(avatar) {
         return fetch(`${this._adress}/users/me/avatar`, {
