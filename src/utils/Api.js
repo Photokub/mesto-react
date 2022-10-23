@@ -16,24 +16,37 @@
     }
 
      getUserInfo() {
-         return this._request(`${this._adress}/users/me`, {
+         return fetch(`${this._adress}/users/me`, {
              method: "GET",
              headers: this._headers,
          })
+             .then((res) => this.handleResp(res));
      }
 
 
-    patchUserInfo({user_name_field, user_job_field}) {
-        return fetch(`${this._adress}/users/me`, {
-            method: 'PATCH',
-            headers: this._headers,
-            body: JSON.stringify({
-                name: user_name_field,
-                about: user_job_field,
-            })
-        })
-            .then((res) => this.handleResp(res));
-    }
+    // patchUserInfo({user_name_field, user_job_field}) {
+    //     return fetch(`${this._adress}/users/me`, {
+    //         method: 'PATCH',
+    //         headers: this._headers,
+    //         body: JSON.stringify({
+    //             name: user_name_field,
+    //             about: user_job_field,
+    //         })
+    //     })
+    //         .then((res) => this.handleResp(res));
+    // }
+
+     patchUserInfo({name, about}) {
+         return fetch(`${this._adress}/users/me`, {
+             method: 'PATCH',
+             headers: this._headers,
+             body: JSON.stringify({
+                 name: name,
+                 about: about,
+             })
+         })
+             .then((res) => this.handleResp(res));
+     }
 
     getDefaultCards() {
         return this._request(`${this._adress}/cards`, {

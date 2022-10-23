@@ -6,6 +6,7 @@ import {PopupWithForm} from "./PopupWithForm";
 import {ImagePopup} from "./ImagePopup";
 import {api} from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
+import {EditProfilePopup} from "./EditProfilePopup";
 
 
 function App() {
@@ -24,22 +25,6 @@ function App() {
                 setCurrentUser(data)
             })
     })
-
-    // useEffect(() => {
-    //     api.getDefaultCards().then(data => {
-    //         setCards(data)
-    //     }).catch((err) => {
-    //         console.log(`Ошибка ${err}`)
-    //     })
-    // }, []);
-    //
-    // function handleCardLike(card) {
-    //     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    //
-    //     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-    //         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    //     });
-    // }
 
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true)
@@ -65,6 +50,24 @@ function App() {
         setSelectedCard({name: '', link: ''})
     }
 
+
+    // function handleUpdateUser({name, description}){
+    //     api.patchUserInfo({name, description})
+    //         .then(data =>{
+    //             setCurrentUser.name(data.name)
+    //             setCurrentUser.descriptiont(data.about)
+    //         })
+    //     closeAllPopups()
+    // }
+
+    function handleUpdateUser({name, about}){
+        api.patchUserInfo({name, about})
+            .then(data =>{
+                setCurrentUser(data)
+            })
+        closeAllPopups()
+    }
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="page">
@@ -75,13 +78,13 @@ function App() {
                     onAddPlace={handleAddPlaceClick}
                     onConfirmClick={handleConfirmClick}
                     onCardClick={setSelectedCard}
-                    // cards={cards}
-                    // onCardLike={handleCardLike}
                 />
 
                 <Footer/>
 
                 <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+
+                <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
 
                 <PopupWithForm
                     name="change-avatar"
@@ -98,27 +101,7 @@ function App() {
                     </label>
                 </PopupWithForm>
 
-                <PopupWithForm
-                    name="profile"
-                    title="Редактировать профиль"
-                    isOpen={isEditProfilePopupOpen}
-                    onClose={closeAllPopups}
-                    btnText="Сохранить"
-                >
-                    <label className="form__field">
-                        <input className="form__input form__input_type_name" type="text"
-                               name="user_name_field" defaultValue=""
-                               required minLength="2" maxLength="40"/>
-                        <span className="form__input-error" id="user_name_field-error"></span>
-                    </label>
-                    <label className="form__field">
-                        <input className="form__input form__input_type_job" type="text" name="user_job_field"
-                               defaultValue=""
-                               required
-                               minLength="2" maxLength="200"/>
-                        <span className="form__input-error" id="user_job_field-error"></span>
-                    </label>
-                </PopupWithForm>
+
 
                 <PopupWithForm
                     name="add-new-card"
