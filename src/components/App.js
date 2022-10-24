@@ -7,6 +7,7 @@ import {ImagePopup} from "./ImagePopup";
 import {api} from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import {EditProfilePopup} from "./EditProfilePopup";
+import {EditAvatarPopup} from "./EditAvatarPopup";
 
 
 function App() {
@@ -52,16 +53,6 @@ function App() {
         setSelectedCard({name: '', link: ''})
     }
 
-
-    // function handleUpdateUser({name, description}){
-    //     api.patchUserInfo({name, description})
-    //         .then(data =>{
-    //             setCurrentUser.name(data.name)
-    //             setCurrentUser.descriptiont(data.about)
-    //         })
-    //     closeAllPopups()
-    // }
-
     function handleUpdateUser({name, about}){
         api.patchUserInfo({name, about})
             .then(data =>{
@@ -69,6 +60,16 @@ function App() {
             })
         closeAllPopups()
     }
+
+    function handleUpdateAvatar(avatar){
+        api.patchAvatar(avatar)
+            .then(data =>{
+                setCurrentUser(data)
+            })
+        closeAllPopups()
+    }
+
+
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -88,20 +89,7 @@ function App() {
 
                 <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
 
-                <PopupWithForm
-                    name="change-avatar"
-                    title="Обновить аватар"
-                    isOpen={isEditAvatarPopupOpen}
-                    onClose={closeAllPopups}
-                    btnText="Сохранить"
-                >
-                    <label className="form__field">
-                        <input className="form__input form__input_type_link" type="url" name="ava_link_field"
-                               defaultValue=""
-                               placeholder="Ссылка на картинку" required/>
-                        <span className="form__input-error" id="ava_link_field-error"></span>
-                    </label>
-                </PopupWithForm>
+                <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
 
 
 
