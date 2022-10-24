@@ -16,12 +16,12 @@
     }
 
      getUserInfo() {
-         return fetch(`${this._adress}/users/me`, {
+         return this._request(`${this._adress}/users/me`, {
              method: "GET",
              headers: this._headers,
          })
-             .then((res) => this.handleResp(res));
      }
+
 
 
     // patchUserInfo({user_name_field, user_job_field}) {
@@ -37,7 +37,7 @@
     // }
 
      patchUserInfo({name, about}) {
-         return fetch(`${this._adress}/users/me`, {
+         return this._request(`${this._adress}/users/me`, {
              method: 'PATCH',
              headers: this._headers,
              body: JSON.stringify({
@@ -45,7 +45,6 @@
                  about: about,
              })
          })
-             .then((res) => this.handleResp(res));
      }
 
     getDefaultCards() {

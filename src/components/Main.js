@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {api} from "../utils/Api";
 import {Card} from "./Card";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 export function Main(props) {
-    const currentUser = React.useContext(CurrentUserContext)
+    const currentUser = useContext(CurrentUserContext)
 
     const [cards, setCards] = useState([])
 

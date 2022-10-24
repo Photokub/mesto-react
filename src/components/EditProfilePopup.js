@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {api} from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import {PopupWithForm} from "./PopupWithForm";
 import {App} from "./App";
 
 export function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
-    const currentUser = React.useContext(CurrentUserContext)
+    const currentUser = useContext(CurrentUserContext)
 
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
@@ -28,7 +28,7 @@ export function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
         });
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         setName(currentUser.name);
         setDescription(currentUser.about);
     }, [currentUser]);
