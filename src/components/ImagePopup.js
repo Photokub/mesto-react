@@ -1,9 +1,9 @@
 import React from "react";
 
-export function ImagePopup({card, onClose}) {
+export function ImagePopup({isOpen, card, onClose}) {
     return (
         <section
-            className={`popup popup_full-size-image ${card.link ? 'popup_opened' : ''}`}
+            className={`popup popup_full-size-image  ${isOpen  ? 'popup_opened' : ''}`}
             type='button'
             aria-label="попап полноразмерного изображения"
         >

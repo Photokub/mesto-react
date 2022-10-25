@@ -1,8 +1,8 @@
-import React from "react";
-
-
+import React, {useState} from "react";
 
 export function PopupWithForm({isOpen, onClose, name, title, btnText, children, onSubmit}) {
+
+
     return (
         <section className={`popup popup_${name}  ${isOpen ? 'popup_opened' : ''}`}
                  aria-label="попап">
@@ -11,11 +11,9 @@ export function PopupWithForm({isOpen, onClose, name, title, btnText, children, 
                 <button className="popup__close" type="button" onClick={onClose}/>
                 <form className="form" name={`${name}`} method="post" onSubmit={onSubmit}>
                     {children}
-                    <button className="form__save-btn
-                    {/*form__save-btn_invalid*/}
-                    "
+                    <button
+                        className="form__save-btn"
                             type="submit"
-                            //disabled
                     >
                         {btnText}
                     </button>

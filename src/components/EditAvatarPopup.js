@@ -1,5 +1,5 @@
 import {PopupWithForm} from "./PopupWithForm";
-import {useRef, useState} from "react";
+import {useRef} from "react";
 
 
 export function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
@@ -11,6 +11,7 @@ export function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
         onUpdateAvatar(
             AvatarRef.current.value
         );
+        AvatarRef.current.value=("")
     }
 
     return (

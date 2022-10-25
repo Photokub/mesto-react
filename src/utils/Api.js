@@ -22,19 +22,6 @@
          })
      }
 
-
-     // patchUserInfo({user_name_field, user_job_field}) {
-     //     return fetch(`${this._adress}/users/me`, {
-     //         method: 'PATCH',
-     //         headers: this._headers,
-     //         body: JSON.stringify({
-     //             name: user_name_field,
-     //             about: user_job_field,
-     //         })
-     //     })
-     //         .then((res) => this.handleResp(res));
-     // }
-
      patchUserInfo({name, about}) {
          return this._request(`${this._adress}/users/me`, {
              method: 'PATCH',
@@ -54,7 +41,7 @@
      }
 
      postCard({name, link}) {
-         return fetch(`${this._adress}/cards`, {
+         return this._request(`${this._adress}/cards`, {
              method: "POST",
              headers: this._headers,
              body: JSON.stringify({
@@ -62,7 +49,6 @@
                  link: link,
              })
          })
-             .then((res) => this.handleResp(res))
      }
 
      changeLikeCardStatus(id, like) {
@@ -72,29 +58,12 @@
          })
      }
 
-     // putLike(id) {
-     //     return fetch(`${this._adress}/cards/${id}/likes`, {
-     //         method: "PUT",
-     //         headers: this._headers,
-     //     })
-     //         .then((res) => this.handleResp(res))
-     // }
-     //
-     // deleteLike(id) {
-     //     return fetch(`${this._adress}/cards/${id}/likes`, {
-     //         method: "DELETE",
-     //         headers: this._headers,
-     //     })
-     //         .then((res) => this.handleResp(res))
-     // }
-
      deleteMyCard(id) {
          return this._request(`${this._adress}/cards/${id}`, {
              method: "DELETE",
              headers: this._headers,
          })
      }
-
 
      patchAvatar(avatar) {
          return this._request(`${this._adress}/users/me/avatar`, {
