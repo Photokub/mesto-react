@@ -64,20 +64,20 @@ function App() {
         api.patchUserInfo({name, about})
             .then(data => {
                 setCurrentUser(data)
+                closeAllPopups()
             }).catch((err) => {
             console.log(`Ошибка ${err}`)
         })
-        closeAllPopups()
     }
 
     function handleUpdateAvatar(avatar) {
         api.patchAvatar(avatar)
             .then(data => {
                 setCurrentUser(data)
+                closeAllPopups()
             }).catch((err) => {
             console.log(`Ошибка ${err}`)
         })
-        closeAllPopups()
     }
 
     useEffect(() => {
@@ -101,20 +101,20 @@ function App() {
     function handleCardDelete(card) {
         api.deleteMyCard(card._id).then(() => {
             setCards(cards => cards.filter((c) => c._id !== card._id));
+            closeAllPopups()
         }).catch((err) => {
             console.log(`Ошибка ${err}`)
         })
-        closeAllPopups()
     }
 
     function handleAddPlaceSubmit({name, link}) {
         api.postCard({name, link})
             .then(newCard => {
                 setCards([newCard, ...cards]);
+                closeAllPopups()
             }).catch((err) => {
             console.log(`Ошибка ${err}`)
         })
-        closeAllPopups()
     }
 
     return (

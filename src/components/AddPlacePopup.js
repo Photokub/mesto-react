@@ -9,11 +9,12 @@ export function AddPlacePopup({isOpen, onClose, onAddPlace}) {
     function handleSubmit(e) {
         e.preventDefault();
         onAddPlace({
-            name: CardNameRef.current.value,
-            link: CardLinkRef.current.value}
+                name: CardNameRef.current.value,
+                link: CardLinkRef.current.value
+            }
         );
-        CardNameRef.current.value=('')
-        CardLinkRef.current.value=('')
+        CardNameRef.current.value = ('')
+        CardLinkRef.current.value = ('')
     }
 
     return (
